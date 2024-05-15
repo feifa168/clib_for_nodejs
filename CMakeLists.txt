@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 3.24)
+set(TARGET cfun)
+project(${TARGET} C)
+
+#set(CMAKE_C_STANDARD 99)
+## 设置编译选项
+#set(CMAKE_C_FLAGS -pthread)
+
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_COMPILER_IS_GNUCC TRUE)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+set(CMAKE_C_FLAGS -pthread)
+
+include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+#set(OUTPUT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../CMakeProjectTestDebug/")
+#set(EXECUTABLE_OUTPUT_PATH "${OUTPUT_PATH}/bin/")
+#set(LIBRARY_OUTPUT_PATH "${OUTPUT_PATH}/lib/")
+
+set(CUSTOM_OUTPUT_PATH ${CMAKE_BINARY_DIR}/..)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CUSTOM_OUTPUT_PATH}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CUSTOM_OUTPUT_PATH}/bin/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CUSTOM_OUTPUT_PATH}/bin)
+
+aux_source_directory(. SRC_LIST)
+
+add_library(${TARGET} SHARED ${SRC_LIST})
